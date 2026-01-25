@@ -124,7 +124,3 @@ function showProgress () {
   let bar = document.querySelector(".progress");
   bar.style.width = `calc(${count} * 100% / ${boxes.length}`;
 }
-
-function addHabit () {
-  
-}
