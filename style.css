@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+:root{
+  --themeColor: #F7DB91;
+  --themeColor2: #D8E983;
+  --themeColor3: #1D546D;
+  --themeColor4: #93BD57;
+  --btnColor: #B0FFFA;
+  --btnColor2: #576A8F;
+  --fontColor: #f2f2f2;
+}
+
+body{
+  background: var(--themeColor);
+  font-family: "Nunito", "Ubuntu",Sans-Serif;
+}
+
+header{
+  background: var(--themeColor2);
+  height: 48px;
+  display: flex;
+  justify-content: center;
+}
+
+nav{
+  display: flex;
+  justify-content: space-between;
+  width: 85vw;
+}
+
+#userName{
+  font-weight: 700;
+}
+
+.clock-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#date{
+  font-weight: 700;
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top:20px;
+  gap: 20px;
+}
+
+.habit-container{
+  width: 85vw;
+  min-height: 200px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 0 5px #555;
+  background: orange;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: 
+  "heading icon"
+  "note icon"
+  "btn btn";
+}
+
+.habit-header{
+  grid-area: heading;
+  font-size: 1.5rem;
+  padding: 10px 0;
+}
+
+.habit-note{
+  grid-area: note;
+  text-align: justify;
+}
+
+.habit-btn{
+  grid-area: btn;
+  padding: 10px 20px;
+  background: var(--btnColor);
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 0 5px #555;
+  font-weight: 700;
+  font-family: "Nunito", Sans-Serif;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.habit-btn:hover{
+  background: var(--btnColor2);
+}
+
+.habit-icon{
+  grid-area: icon;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  color: var(--fontColor);
+  margin: 10px;
+  background-color: var(--themeColor3);
+  border-radius: 5px;
+}
+
+.resetBtn{
+  padding:20px;
+  border-radius: 5px;
+  border: none;
+  position: absolute;
+  bottom: 5%;
+  left: 10%;
+  box-shadow: 0 0 5px #555;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: #980002;
+  color: #fff;
+}
+
+.addHabitBtn{
+  padding:20px;
+  border-radius: 5px;
+  border: none;
+  position: absolute;
+  bottom: 5%;
+  right: 10%;
+  box-shadow: 0 0 5px #555;
+  font-size: 1.2rem;
+  font-weight: 700;
+  background-color: #980002;
+  color: #fff;
+}
+
+.prompt-container{
+  background: var(--themeColor);
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+
+.promptBox{
+  position: absolute;
+  background-color: var(--themeColor4);
+  border-radius: 20px;
+  width: 85vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.promptBox nav{
+  padding: 20px;
+  background: var(--themeColor3);
+  border-radius: 20px 20px 0 0;
+  color: #fff;
+  font-size: 1.5rem;
+}
+
+.promptBox main{
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.promptBox main input{
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid var(--themeColor3);
+  font-size: 1.2rem;
+}
+
+.promptBox main button{
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 0 5px #fff;
+  background: #980002;
+  color: #fff;
+}
+
+.progress-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.progress-container p{
+  font-weight: 700;
+}
+
+.progress-bar{
+  height: 10px;
+  width: 85vw;
+  background: #fff;
+  border-radius: 20px;
+}
+
+.progress{
+  background: var(--themeColor4);
+  height: 100%;
+  width: 0;
+  border-radius: 20px;
+  transition: all 1s ease;
+}
+
+.newHabitPrompt-container{
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  background-color: var(--themeColor2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newHabitPrompt{
+  padding: 10px;
+  background-color: var(--themeColor4);
+  border-radius: 10px;
+  box-shadow: 0 0 5px #555;
+  width: 85vw;
+  min-height: 200px;
+}

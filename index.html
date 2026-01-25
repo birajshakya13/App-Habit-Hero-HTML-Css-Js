@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Habit-Hero</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="user-container" onclick="localStorage.removeItem('user'); location.reload()">
+        <p>
+          Welcome!!
+        </p>
+        <p id="userName"></p>
+      </div>
+      <div class="clock-container">
+        <p id="date">
+          Date
+        </p>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <div class="newHabitPrompt-container">
+      <div class="newHabitPrompt">
+        <div>
+          <label for="newHabit">Habit Name</label>
+          <input type="text" id="newHabit">
+        </div>
+        <div>
+          <label for="habitNote">Habit Note</label>
+          <input type="text" id="habitNote">
+        </div>
+      </div>
+    </div>
+    <div class="progress-container">
+      <p>
+        Progress Bar
+      </p>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="habit-container" id="reading">
+        <p class="habit-header">
+          Reading 10 pages
+        </p>
+        <p class="habit-note">
+          Reading is a good habit. It will sharp your brain and more focused.
+        </p>
+        <button class="habit-btn" onclick="workDone(this)">Complete</button>
+        <icon class="habit-icon"><i class="fas fa-book-open"></i></icon>
+      </div>
+      <div class="habit-container" id="drinking">
+        <p class="habit-header">
+          Drink 2L Water
+        </p>
+        <p class="habit-note">
+          Drinking water is very essential thing. Hidrate your body.
+        </p>
+        <button class="habit-btn" onclick="workDone(this)">Complete</button>
+        <icon class="habit-icon"><i class="fas fa-droplet"></i></icon>
+      </div>
+      <div class="habit-container" id="excercising">
+        <p class="habit-header">
+          Excercise
+        </p>
+        <p class="habit-note">
+          Excercise is very good habit. It makes your body strong and healthy.
+        </p>
+        <button class="habit-btn" onclick="workDone(this)">Complete</button>
+        <icon class="habit-icon"><i class="fas fa-dumbbell"></i></icon>
+      </div>
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
