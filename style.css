@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-*{
+
+* {
   margin: 0;
   padding: 0;
   text-decoration: none;
@@ -7,7 +8,7 @@
   box-sizing: border-box;
 }
 
-:root{
+:root {
   --themeColor: #F7DB91;
   --themeColor2: #D8E983;
   --themeColor3: #1D546D;
@@ -15,50 +16,51 @@
   --btnColor: #B0FFFA;
   --btnColor2: #576A8F;
   --fontColor: #f2f2f2;
+  --fontFamily: "Nunito", "Ubuntu", Sans-Serif;
 }
 
-body{
+body {
   background: var(--themeColor);
-  font-family: "Nunito", "Ubuntu",Sans-Serif;
+  font-family: "Nunito", "Ubuntu", Sans-Serif;
 }
 
-header{
+header {
   background: var(--themeColor2);
   height: 48px;
   display: flex;
   justify-content: center;
 }
 
-nav{
+nav {
   display: flex;
   justify-content: space-between;
   width: 85vw;
 }
 
-#userName{
+#userName {
   font-weight: 700;
 }
 
-.clock-container{
+.clock-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
-#date{
+#date {
   font-weight: 700;
 }
 
-.container{
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top:20px;
+  padding-top: 20px;
   gap: 20px;
 }
 
-.habit-container{
+.habit-container {
   width: 85vw;
   min-height: 200px;
   padding: 10px;
@@ -69,24 +71,24 @@ nav{
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  grid-template-areas: 
-  "heading icon"
-  "note icon"
-  "btn btn";
+  grid-template-areas:
+    "heading icon"
+    "note icon"
+    "btn btn";
 }
 
-.habit-header{
+.habit-header {
   grid-area: heading;
   font-size: 1.5rem;
   padding: 10px 0;
 }
 
-.habit-note{
+.habit-note {
   grid-area: note;
   text-align: justify;
 }
 
-.habit-btn{
+.habit-btn {
   grid-area: btn;
   padding: 10px 20px;
   background: var(--btnColor);
@@ -99,11 +101,11 @@ nav{
   cursor: pointer;
 }
 
-.habit-btn:hover{
+.habit-btn:hover {
   background: var(--btnColor2);
 }
 
-.habit-icon{
+.habit-icon {
   grid-area: icon;
   display: flex;
   justify-content: center;
@@ -115,8 +117,8 @@ nav{
   border-radius: 5px;
 }
 
-.resetBtn{
-  padding:20px;
+.resetBtn {
+  padding: 20px;
   border-radius: 5px;
   border: none;
   position: absolute;
@@ -129,8 +131,8 @@ nav{
   color: #fff;
 }
 
-.addHabitBtn{
-  padding:20px;
+.addHabitBtn {
+  padding: 20px;
   border-radius: 5px;
   border: none;
   position: absolute;
@@ -143,7 +145,7 @@ nav{
   color: #fff;
 }
 
-.prompt-container{
+.prompt-container {
   background: var(--themeColor);
   height: 100vh;
   width: 100vw;
@@ -152,7 +154,7 @@ nav{
   z-index: 1;
 }
 
-.promptBox{
+.promptBox {
   position: absolute;
   background-color: var(--themeColor4);
   border-radius: 20px;
@@ -162,7 +164,7 @@ nav{
   transform: translate(-50%, -50%);
 }
 
-.promptBox nav{
+.promptBox nav {
   padding: 20px;
   background: var(--themeColor3);
   border-radius: 20px 20px 0 0;
@@ -170,7 +172,7 @@ nav{
   font-size: 1.5rem;
 }
 
-.promptBox main{
+.promptBox main {
   padding: 10px;
   display: flex;
   justify-content: center;
@@ -178,14 +180,14 @@ nav{
   gap: 10px;
 }
 
-.promptBox main input{
+.promptBox main input {
   padding: 10px;
   border-radius: 10px;
   border: 2px solid var(--themeColor3);
   font-size: 1.2rem;
 }
 
-.promptBox main button{
+.promptBox main button {
   padding: 10px;
   border-radius: 10px;
   border: none;
@@ -194,25 +196,25 @@ nav{
   color: #fff;
 }
 
-.progress-container{
+.progress-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
 
-.progress-container p{
+.progress-container p {
   font-weight: 700;
 }
 
-.progress-bar{
+.progress-bar {
   height: 10px;
   width: 85vw;
   background: #fff;
   border-radius: 20px;
 }
 
-.progress{
+.progress {
   background: var(--themeColor4);
   height: 100%;
   width: 0;
@@ -220,7 +222,7 @@ nav{
   transition: all 1s ease;
 }
 
-.newHabitPrompt-container{
+.newHabitPrompt-container {
   height: 100vh;
   width: 100vw;
   position: absolute;
@@ -232,11 +234,95 @@ nav{
   align-items: center;
 }
 
-.newHabitPrompt{
-  padding: 10px;
+.newHabitPrompt {
+  padding: 10px 20px;
   background-color: var(--themeColor4);
   border-radius: 10px;
   box-shadow: 0 0 5px #555;
   width: 85vw;
+  max-width: 300px;
   min-height: 200px;
 }
+
+.newHabit-title {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.newHabit {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.newHabit div {
+  border-radius: 10px;
+  position: relative;
+  width: 100%;
+}
+
+.newHabit div input {
+  border-radius: 10px;
+  padding: 10px;
+  border: none;
+  width: 100%;
+}
+
+.newHabit div label {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-family: var(--fontFamily);
+  color: #333;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  padding: 5px;
+}
+
+.newHabit div input:focus {
+  outline: 5px solid var(--btnColor2);
+}
+
+.newHabit div input:focus+label,
+.newHabit div input:not(:placeholder-shown)+label {
+  top: -15px;
+  left: 15px;
+  font-size: 0.8rem;
+  background: linear-gradient(to bottom, var(--themeColor4) 10%, #fff 90%);
+  font-weight: 700;
+  color: #576A8F;
+}
+
+.newHabit-icon label{
+  aspect-ratio: 1/1;
+  max-height: 50px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 5px #555;
+  color: var(--themeColor3);
+}
+
+.newHabit-icon label input {
+  display: none;
+}
+
+.newHabit-icon:has(input:checked){
+  outline: 5px solid var(--btnColor2);
+}
+
+/* .newHabit-img{
+  background-color: rgba(255,255,2555,0.5);
+  aspect-ratio: 1/1;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 5px #555;
+}
+
+.habit-icon:checked + div{
+  outline: 5px solid var(--btnColor2);
+} */

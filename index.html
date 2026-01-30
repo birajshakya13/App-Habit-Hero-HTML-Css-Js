@@ -27,13 +27,28 @@
   <main>
     <div class="newHabitPrompt-container">
       <div class="newHabitPrompt">
-        <div>
-          <label for="newHabit">Habit Name</label>
-          <input type="text" id="newHabit">
+        <div class="newHabit-title">
+          <h3>Add New Habit</h3>
         </div>
-        <div>
-          <label for="habitNote">Habit Note</label>
-          <input type="text" id="habitNote">
+        <div class="newHabit">
+          <div>
+            <input type="text" id="newHabit" class="habit" placeholder=" ">
+            <label for="newHabit">Habit Name</label>
+          </div>
+        </div>
+        <div class="newHabit">
+          <div>
+            <input type="text" id="habitNote" class="habit" placeholder=" ">
+            <label for="habitNote">Habit Note</label>
+          </div>
+        </div>
+        <div class="newHabit-icon">
+          <label>
+            <input type="radio" name="habit-icon">
+            <div class="newHabit-img">
+              <i class="fas fa-droplet"></i>
+            </div>
+          </label>
         </div>
       </div>
     </div>
