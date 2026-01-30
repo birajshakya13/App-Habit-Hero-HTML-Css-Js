@@ -293,9 +293,15 @@ nav {
   color: #576A8F;
 }
 
+.newHabit-icon{
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+}
+
 .newHabit-icon label{
   aspect-ratio: 1/1;
-  max-height: 50px;
+  height: 50px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   display: flex;
@@ -309,20 +315,11 @@ nav {
   display: none;
 }
 
-.newHabit-icon:has(input:checked){
+.newHabit-icon label:has(input:checked){
   outline: 5px solid var(--btnColor2);
 }
 
-/* .newHabit-img{
-  background-color: rgba(255,255,2555,0.5);
-  aspect-ratio: 1/1;
-  height: 50px;
+.newHabit-btn{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 5px #555;
+  justify-content: space-between;
 }
-
-.habit-icon:checked + div{
-  outline: 5px solid var(--btnColor2);
-} */
