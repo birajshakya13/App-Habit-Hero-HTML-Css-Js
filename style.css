@@ -243,11 +243,26 @@ nav {
   width: 85vw;
   max-width: 300px;
   min-height: 200px;
+  position: relative;
 }
 
 .newHabit-title {
   text-align: center;
   padding-bottom: 20px;
+}
+
+.newHabit-close{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.newHabit-close button{
+  background-color: #980002;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .newHabit {
