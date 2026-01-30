@@ -55,36 +55,95 @@ document.addEventListener("DOMContentLoaded", () => {
     body.appendChild(btn);
   }
   createResetBtn();
-  
+
   //For add Habit Button
   let createAddHabitBtn = () => {
     let body = document.querySelector("body");
     let btn = document.createElement("button");
     btn.innerHTML = "<i class='fas fa-plus'></i>";
     btn.classList.add("addHabitBtn");
+    btn.addEventListener("click", ()=>{
+      let box = document.querySelector(".newHabitPrompt-container");
+      box.style.display = "flex";
+    });
     body.appendChild(btn);
   }
   createAddHabitBtn();
-  
+
   //checking habit
   let boxes = document.querySelectorAll(".habit-container");
   boxes.forEach(box => {
-    if(localStorage.getItem(box.id) === "true"){
-    let btn = box.querySelector(".habit-btn");
-    box.style.backgroundColor = "var(--themeColor4)";
-    btn.innerHTML = "Finished";
-    btn.style.backgroundColor = "var(--btnColor2)";
-    count++;
-    console.log(count);
-    showProgress();
-  }else{
-    console.log("not good")
-  }
+    if (localStorage.getItem(box.id) === "true") {
+      let btn = box.querySelector(".habit-btn");
+      box.style.backgroundColor = "var(--themeColor4)";
+      btn.innerHTML = "Finished";
+      btn.style.backgroundColor = "var(--btnColor2)";
+      count++;
+      console.log(count);
+      showProgress();
+    } else {
+      console.log("not good")
+    }
   })
-  
+  // Creating add Habit Form
+  let addHabit = () => {
+    let body = document.querySelector("main");
+    let form = document.createElement("div");
+    form.classList.add("newHabitPrompt-container");
+    form.innerHTML =
+      `<div class="newHabitPrompt">
+        <div class="newHabit-title">
+          <h3>Add New Habit</h3>
+        </div>
+        <div class="newHabit">
+          <div>
+            <input type="text" id="newHabit" class="habit" placeholder=" ">
+            <label for="newHabit">Habit Name</label>
+          </div>
+        </div>
+        <div class="newHabit">
+          <div>
+            <input type="text" id="habitNote" class="habit" placeholder=" ">
+            <label for="habitNote">Habit Note</label>
+          </div>
+        </div>
+        <div class="newHabit-icon">
+          <label>
+            <input type="radio" name="habit-icon" value="drinkWater">
+            <div class="newHabit-img">
+              <i class="fas fa-droplet"></i>
+            </div>
+          </label>
+          <label>
+            <input type="radio" name="habit-icon" value="readBook" >
+            <div class="newHabit-img">
+              <i class="fas fa-book-open"></i>
+            </div>
+          </label>
+          <label>
+            <input type="radio" name="habit-icon" value="excercise" >
+            <div class="newHabit-img">
+              <i class="fas fa-dumbbell"></i>
+            </div>
+          </label>
+          <label>
+            <input type="radio" name="habit-icon" value="other" >
+            <div class="newHabit-img">
+              <i class="fas fa-ellipsis"></i>
+            </div>
+          </label>
+        </div>
+        <div class="newHabit-btn">
+          <input type="submit" class="habit-btn">
+          <input type="reset" class="habit-btn">
+        </div>
+      </div>`;
+    body.appendChild(form);
+  }
+  addHabit();
 })
 let count = 0;
-function workDone (btn) {
+function workDone(btn) {
   let box = btn.parentElement;
   if (btn.innerHTML === "Complete") {
     box.style.backgroundColor = "var(--themeColor4)";
@@ -105,7 +164,7 @@ function workDone (btn) {
   }
 }
 
-function resetAll () {
+function resetAll() {
   let btns = document.querySelectorAll(".habit-btn");
   btns.forEach(btn => {
     let box = btn.parentElement;
@@ -114,12 +173,12 @@ function resetAll () {
     btn.style.backgroundColor = "var(--btnColor)";
     localStorage.removeItem(box.id);
   })
-    count = 0;
-    console.log(count);
-    showProgress();
+  count = 0;
+  console.log(count);
+  showProgress();
 }
 
-function showProgress () {
+function showProgress() {
   let boxes = document.querySelectorAll('.habit-container');
   let bar = document.querySelector(".progress");
   bar.style.width = `calc(${count} * 100% / ${boxes.length}`;
