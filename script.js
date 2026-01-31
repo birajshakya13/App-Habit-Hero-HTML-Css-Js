@@ -80,12 +80,13 @@ document.addEventListener("DOMContentLoaded", () => {
       let key = localStorage.key(i);
       if (key.includes("habit")) {
         let data = JSON.parse(localStorage.getItem(key));
+        let habitId = data.keyId;
         let habitName = data.keyName;
         let habitNote = data.keyNote;
         let habitIcon = data.keyIcon;
         let div = document.createElement("div");
         div.classList.add("habit-container");
-        div.id = `habit${j}`;
+        div.id = habitId;
         div.innerHTML = `
         <p class="habit-header">${habitName}</p>
         <button class="dltHabit" onclick="dltHabit(this)"><i class="fas fa-xmark"></i></button>
@@ -257,7 +258,7 @@ function addHabit() {
   let habitIcon = document.querySelector("input[name='habit-icon']:checked").value;
   let div = document.createElement("div");
   div.classList.add("habit-container");
-  div.id = `habit${boxes.length}`;
+  div.id = `habit${Date.now()}`;
   div.innerHTML = `
   <p class="habit-header">${habitName}</p>
   <button class="dltHabit" onclick="dltHabit(this)"><i class="fas fa-xmark"></i></button>
@@ -268,6 +269,7 @@ function addHabit() {
   container.appendChild(div);
   let data = {
     keyStatus: "false",
+    keyId: div.id,
     keyName: habitName,
     keyNote: habitNote,
     keyIcon: habitIcon
@@ -281,5 +283,5 @@ function addHabit() {
 function dltHabit(btn) {
   let box = btn.parentElement;
   localStorage.removeItem(box.id);
-  location.reload();
+  box.remove();
 }
