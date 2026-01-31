@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let btn = document.createElement("button");
     btn.innerHTML = "<i class='fas fa-times'></i>";
     btn.classList.add("resetBtn");
+    btn.id = "clearProgress";
     btn.addEventListener("click", resetAll)
     body.appendChild(btn);
   }
@@ -80,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
       let key = localStorage.key(i);
       if (key.includes("habit")) {
         let data = JSON.parse(localStorage.getItem(key));
-        let habitId = data.keyId;
         let habitName = data.keyName;
         let habitNote = data.keyNote;
         let habitIcon = data.keyIcon;
@@ -184,6 +184,8 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("not good")
     }
   })
+
+  checkClearHabitBtn();
 })
 
 let count = 0;
@@ -269,19 +271,31 @@ function addHabit() {
   container.appendChild(div);
   let data = {
     keyStatus: "false",
-    keyId: div.id,
     keyName: habitName,
     keyNote: habitNote,
     keyIcon: habitIcon
   };
-  let key = `habit${boxes.length}`;
+  let key = div.id;
   localStorage.setItem(key, JSON.stringify(data));
   closeHabitForm();
-  habitFromReset()
+  habitFromReset();
+  checkClearHabitBtn();
+}
+
+function checkClearHabitBtn() {
+  let container = document.querySelector("#habitContainer");
+  let habits = Array.from(container.children);
+  let btn = document.querySelector("#clearProgress");
+  if(habits.length <= 0) {
+    btn.style.visibility = "hidden";
+  } else {
+    btn.style.visibility = "visible ";
+  }
 }
 
 function dltHabit(btn) {
   let box = btn.parentElement;
   localStorage.removeItem(box.id);
   box.remove();
+  checkClearHabitBtn();
 }
