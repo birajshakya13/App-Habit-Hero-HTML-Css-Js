@@ -71,10 +71,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   createAddHabitBtn();
 
+  //checking habits
+
+  function initiateHabit() {
+    let container = document.querySelector("#habitContainer");
+    for(let i = 0;i < localStorage.length; i++) {
+      let key = localStorage.key(i);
+
+      if (key.includes("habit")) {
+        let data = JSON.parse(localStorage.getItem(key));
+        let habitName = data.keyName;
+        let habitNote = data.keyNote;
+        let habitIcon = data.keyIcon;
+        let div = document.createElement("div");
+        div.classList.add("habit-container");
+        div.id = `habit${i}`;
+        div.innerHTML = `
+        <p class="habit-header">${habitName}</p>
+        <p class="habit-note">${habitNote}</p>
+        <button class="habit-btn" onclick="workDone(this)">Complete</button>
+        <icon class="habit-icon"><i class="fas fa-${habitIcon}"></i></icon>
+        `;
+        container.appendChild(div);
+      }
+    }
+  }
+  initiateHabit();
+
   //checking habit
   let boxes = document.querySelectorAll(".habit-container");
   boxes.forEach(box => {
-    if (localStorage.getItem(box.id) === "true") {
+    let data = JSON.parse(localStorage.getItem(box.id));
+    if (data === "true") {
       let btn = box.querySelector(".habit-btn");
       box.style.backgroundColor = "var(--themeColor4)";
       btn.innerHTML = "Finished";
@@ -143,22 +171,25 @@ document.addEventListener("DOMContentLoaded", () => {
           <input type="reset" class="habit-btn">
         </div>
       </div>`;
-      form.addEventListener("submit", (e)=>{
-        e.preventDefault();
-        addHabit();
-      })
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      addHabit();
+    })
     body.appendChild(form);
   }
   habitform();
 })
+
 let count = 0;
 function workDone(btn) {
   let box = btn.parentElement;
-  if (btn.innerHTML === "Complete") {
+  let habit = JSON.parse(localStorage.getItem(box.id));
+  if (habit === "false") {
     box.style.backgroundColor = "var(--themeColor4)";
     btn.innerHTML = "Finished";
     btn.style.backgroundColor = "var(--btnColor2)";
-    localStorage.setItem(box.id, "true");
+    habit.keyStatus = "true";
+    localStorage.setItem(box.id, JSON.stringify(habit));
     count++;
     console.log(count);
     showProgress();
@@ -166,7 +197,8 @@ function workDone(btn) {
     box.style.backgroundColor = "orange";
     btn.innerHTML = "Complete";
     btn.style.backgroundColor = "var(--btnColor)";
-    localStorage.removeItem(box.id);
+    habit.keyStatus = "false";
+    localStorage.setItem(box.id, JSON.stringify(habit));
     count--;
     console.log(count);
     showProgress();
@@ -177,10 +209,12 @@ function resetAll() {
   let btns = document.querySelectorAll(".habit-btn");
   btns.forEach(btn => {
     let box = btn.parentElement;
+    let habit = JSON.parse(localStorage.getItem(box.id)).keyStatus;
     box.style.backgroundColor = "orange";
     btn.innerHTML = "Complete";
     btn.style.backgroundColor = "var(--btnColor)";
-    localStorage.removeItem(box.id);
+    habit.keyStatus = "false";
+    localStorage.setItem(box.id, JSON.stringify(habit));
   })
   count = 0;
   showProgress();
@@ -202,6 +236,13 @@ function closeHabitForm() {
   box.style.display = "none";
 }
 
+function habitFromReset() {
+  let habitName = document.querySelector("#newHabit-name");
+  let habitNote = document.querySelector("#newHabit-note");
+  habitName.value = "";
+  habitNote.value = "";
+}
+
 function addHabit() {
   let container = document.querySelector("#habitContainer");
   let boxes = Array.from(container.children);
@@ -213,12 +254,13 @@ function addHabit() {
   div.id = `habit${boxes.length}`;
   div.innerHTML = `
   <p class="habit-header">${habitName}</p>
-  <p class="habit-note">${habitNote}}</p>
+  <p class="habit-note">${habitNote}</p>
   <button class="habit-btn" onclick="workDone(this)">Complete</button>
   <icon class="habit-icon"><i class="fas fa-${habitIcon}"></i></icon>
   `;
   container.appendChild(div);
   let data = {
+    keyStatus: "false",
     keyName: habitName,
     keyNote: habitNote,
     keyIcon: habitIcon
@@ -226,4 +268,5 @@ function addHabit() {
   let key = `habit${boxes.length}`;
   localStorage.setItem(key, JSON.stringify(data));
   closeHabitForm();
+  habitFromReset()
 }

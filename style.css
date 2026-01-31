@@ -87,6 +87,7 @@ nav {
 .habit-note {
   grid-area: note;
   text-align: justify;
+  font-size: 0.8rem;
 }
 
 .habit-btn {
