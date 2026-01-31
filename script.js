@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     myDiv.innerHTML = `
     <div class="promptBox">
     <nav>
-    <label for="userName">Enter Your Full Name:</label>
+    <label for="fullName">Enter Your Full Name:</label>
     </nav>
     <main>
     <input type="text" pattern="[A-Za-z ]+" id="fullName" name="fullName" required>
@@ -75,9 +75,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function initiateHabit() {
     let container = document.querySelector("#habitContainer");
+    let j = 0;
     for(let i = 0;i < localStorage.length; i++) {
       let key = localStorage.key(i);
-
       if (key.includes("habit")) {
         let data = JSON.parse(localStorage.getItem(key));
         let habitName = data.keyName;
@@ -85,23 +85,92 @@ document.addEventListener("DOMContentLoaded", () => {
         let habitIcon = data.keyIcon;
         let div = document.createElement("div");
         div.classList.add("habit-container");
-        div.id = `habit${i}`;
+        div.id = `habit${j}`;
         div.innerHTML = `
         <p class="habit-header">${habitName}</p>
+        <button class="dltHabit" onclick="dltHabit(this)"><i class="fas fa-xmark"></i></button>
         <p class="habit-note">${habitNote}</p>
         <button class="habit-btn" onclick="workDone(this)">Complete</button>
         <icon class="habit-icon"><i class="fas fa-${habitIcon}"></i></icon>
         `;
         container.appendChild(div);
+        j++;
       }
     }
   }
   initiateHabit();
 
+  // Creating add Habit Form
+  let habitform = () => {
+    let body = document.querySelector("main");
+    let form = document.createElement("div");
+    form.classList.add("newHabitPrompt-container");
+    form.id = "newHabitPrompt";
+    form.innerHTML =
+      `<div class="newHabitPrompt">
+        <div class="newHabit-title">
+          <h3>Add New Habit</h3>
+        </div>
+        <div class="newHabit-close">
+          <button onclick="closeHabitForm()"><i class="fas fa-xmark"></i></button>
+        </div>
+        <form>
+          <div class="newHabit">
+            <div>
+              <input type="text" id="newHabit-name" class="habit" placeholder=" " required>
+              <label for="newHabit">Habit Name</label>
+            </div>
+          </div>
+          <div class="newHabit">
+            <div>
+              <input type="text" id="newHabit-note" class="habit" placeholder=" " required>
+              <label for="habitNote">Habit Note</label>
+            </div>
+          </div>
+          <div class="newHabit-icon">
+            <label>
+              <input type="radio" name="habit-icon" value="droplet">
+              <div class="newHabit-img">
+                <i class="fas fa-droplet"></i>
+              </div>
+            </label>
+            <label>
+              <input type="radio" name="habit-icon" value="book-open" >
+              <div class="newHabit-img">
+                <i class="fas fa-book-open"></i>
+              </div>
+            </label>
+            <label>
+              <input type="radio" name="habit-icon" value="dumbbell" >
+              <div class="newHabit-img">
+                <i class="fas fa-dumbbell"></i>
+              </div>
+            </label>
+            <label>
+              <input type="radio" name="habit-icon" value="ellipsis" checked>
+              <div class="newHabit-img">
+                <i class="fas fa-ellipsis"></i>
+              </div>
+            </label>
+          </div>
+          <div class="newHabit-btn">
+            <input type="submit" class="habit-btn">
+            <input type="reset" class="habit-btn">
+          </div>
+        </form>
+      </div>`;
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      addHabit();
+    })
+    body.appendChild(form);
+  }
+  habitform();
+
   //checking habit
   let boxes = document.querySelectorAll(".habit-container");
   boxes.forEach(box => {
-    let data = JSON.parse(localStorage.getItem(box.id));
+    let data = JSON.parse(localStorage.getItem(box.id)).keyStatus;
     if (data === "true") {
       let btn = box.querySelector(".habit-btn");
       box.style.backgroundColor = "var(--themeColor4)";
@@ -114,84 +183,19 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("not good")
     }
   })
-  // Creating add Habit Form
-  let habitform = () => {
-    let body = document.querySelector("main");
-    let form = document.createElement("form");
-    form.classList.add("newHabitPrompt-container");
-    form.id = "newHabitPrompt";
-    form.innerHTML =
-      `<div class="newHabitPrompt">
-        <div class="newHabit-title">
-          <h3>Add New Habit</h3>
-        </div>
-        <div class="newHabit-close">
-          <button onclick="closeHabitForm()"><i class="fas fa-xmark"></i></button>
-        </div>
-        <div class="newHabit">
-          <div>
-            <input type="text" id="newHabit-name" class="habit" placeholder=" " required>
-            <label for="newHabit">Habit Name</label>
-          </div>
-        </div>
-        <div class="newHabit">
-          <div>
-            <input type="text" id="newHabit-note" class="habit" placeholder=" " required>
-            <label for="habitNote">Habit Note</label>
-          </div>
-        </div>
-        <div class="newHabit-icon">
-          <label>
-            <input type="radio" name="habit-icon" value="droplet">
-            <div class="newHabit-img">
-              <i class="fas fa-droplet"></i>
-            </div>
-          </label>
-          <label>
-            <input type="radio" name="habit-icon" value="book-open" >
-            <div class="newHabit-img">
-              <i class="fas fa-book-open"></i>
-            </div>
-          </label>
-          <label>
-            <input type="radio" name="habit-icon" value="dumbbell" >
-            <div class="newHabit-img">
-              <i class="fas fa-dumbbell"></i>
-            </div>
-          </label>
-          <label>
-            <input type="radio" name="habit-icon" value="ellipsis" checked>
-            <div class="newHabit-img">
-              <i class="fas fa-ellipsis"></i>
-            </div>
-          </label>
-        </div>
-        <div class="newHabit-btn">
-          <input type="submit" class="habit-btn">
-          <input type="reset" class="habit-btn">
-        </div>
-      </div>`;
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      addHabit();
-    })
-    body.appendChild(form);
-  }
-  habitform();
 })
 
 let count = 0;
 function workDone(btn) {
   let box = btn.parentElement;
   let habit = JSON.parse(localStorage.getItem(box.id));
-  if (habit === "false") {
+  if (habit.keyStatus === "false") {
     box.style.backgroundColor = "var(--themeColor4)";
     btn.innerHTML = "Finished";
     btn.style.backgroundColor = "var(--btnColor2)";
     habit.keyStatus = "true";
     localStorage.setItem(box.id, JSON.stringify(habit));
     count++;
-    console.log(count);
     showProgress();
   } else {
     box.style.backgroundColor = "orange";
@@ -200,16 +204,15 @@ function workDone(btn) {
     habit.keyStatus = "false";
     localStorage.setItem(box.id, JSON.stringify(habit));
     count--;
-    console.log(count);
     showProgress();
   }
 }
 
 function resetAll() {
-  let btns = document.querySelectorAll(".habit-btn");
-  btns.forEach(btn => {
-    let box = btn.parentElement;
-    let habit = JSON.parse(localStorage.getItem(box.id)).keyStatus;
+  let boxes = document.querySelectorAll(".habit-container");
+  boxes.forEach(box => {
+    let btn = box.querySelector(".habit-btn")
+    let habit = JSON.parse(localStorage.getItem(box.id));
     box.style.backgroundColor = "orange";
     btn.innerHTML = "Complete";
     btn.style.backgroundColor = "var(--btnColor)";
@@ -223,15 +226,17 @@ function resetAll() {
 function showProgress() {
   let boxes = document.querySelectorAll('.habit-container');
   let bar = document.querySelector(".progress");
-  if (boxes.length >= 1) {
+  if (boxes.length >= 1 || count >= 1) {
     bar.style.width = `calc(${count} * 100% / ${boxes.length}`;
-    bar.style.visibility = "visible";
+    bar.style.display = "block";
   } else {
-    bar.style.visibility = "hidden";
+    bar.style.display = "none";
   }
+  console.log(count);
 }
 
 function closeHabitForm() {
+  habitFromReset()
   let box = document.querySelector(".newHabitPrompt-container");
   box.style.display = "none";
 }
@@ -246,7 +251,8 @@ function habitFromReset() {
 function addHabit() {
   let container = document.querySelector("#habitContainer");
   let boxes = Array.from(container.children);
-  let habitName = document.querySelector("#newHabit-name").value;
+  console.log(boxes.length);
+  let habitName = document.querySelector("#newHabit-name").value.toUpperCase();
   let habitNote = document.querySelector("#newHabit-note").value;
   let habitIcon = document.querySelector("input[name='habit-icon']:checked").value;
   let div = document.createElement("div");
@@ -254,6 +260,7 @@ function addHabit() {
   div.id = `habit${boxes.length}`;
   div.innerHTML = `
   <p class="habit-header">${habitName}</p>
+  <button class="dltHabit" onclick="dltHabit(this)"><i class="fas fa-xmark"></i></button>
   <p class="habit-note">${habitNote}</p>
   <button class="habit-btn" onclick="workDone(this)">Complete</button>
   <icon class="habit-icon"><i class="fas fa-${habitIcon}"></i></icon>
@@ -269,4 +276,10 @@ function addHabit() {
   localStorage.setItem(key, JSON.stringify(data));
   closeHabitForm();
   habitFromReset()
+}
+
+function dltHabit(btn) {
+  let box = btn.parentElement;
+  localStorage.removeItem(box.id);
+  location.reload();
 }

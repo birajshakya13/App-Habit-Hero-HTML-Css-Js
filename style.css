@@ -64,24 +64,38 @@ nav {
   max-width: 300px;
   min-width: 290px;
   min-height: 200px;
+  max-height: 200px;
   padding: 10px;
   border: none;
   border-radius: 20px;
   box-shadow: 0 0 5px #555;
   background: orange;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
-    "heading icon"
+    "heading heading"
     "note icon"
     "btn btn";
+    position: relative;
 }
 
 .habit-header {
   grid-area: heading;
   font-size: 1.3rem;
-  padding: 10px 0;
+  align-items: center;
+  font-weight: 700;
+}
+
+.dltHabit{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #980002;
+  color: #fff;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 .habit-note {
@@ -89,6 +103,7 @@ nav {
   text-align: justify;
   font-size: 0.8rem;
 }
+
 
 .habit-btn {
   grid-area: btn;
@@ -109,12 +124,13 @@ nav {
 
 .habit-icon {
   grid-area: icon;
+  aspect-ratio: 1/1;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3rem;
+  justify-self: end;
   color: var(--fontColor);
-  margin: 10px;
   background-color: var(--themeColor3);
   border-radius: 5px;
 }
@@ -161,6 +177,7 @@ nav {
   background-color: var(--themeColor4);
   border-radius: 20px;
   width: 85vw;
+  max-width: 400px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -172,6 +189,7 @@ nav {
   border-radius: 20px 20px 0 0;
   color: #fff;
   font-size: 1.5rem;
+  width: 100%;
 }
 
 .promptBox main {
